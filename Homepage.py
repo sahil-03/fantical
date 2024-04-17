@@ -129,7 +129,7 @@ if st.session_state.show_user_settings_form:
 
 # Selection Menus (bot, voice)
 role = st.sidebar.selectbox("Select your bot", options=st.session_state.bot_config[BOT_OPTIONS_KEY], key="choose_bot")
-voice = st.sidebar.selectbox("Select a voice for your bot", options=[None, '🛠️ Alloy ', '🔊 Echo', '📖 Fable', '💎 Onyx', '🌟 Nova', '✨ Shimmer'])
+voice = None #st.sidebar.selectbox("Select a voice for your bot", options=[None, '🛠️ Alloy ', '🔊 Echo', '📖 Fable', '💎 Onyx', '🌟 Nova', '✨ Shimmer'])
 
 openai_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
 if openai_key: 
