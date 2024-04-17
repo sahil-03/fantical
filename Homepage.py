@@ -48,7 +48,7 @@ if 'vector_db' not in st.session_state:
     st.session_state.vector_db = {}
 
 if 'openai_conn' not in st.session_state: 
-    st.session_state.openai_conn = ChatGeneration()
+    st.session_state.openai_conn = None
 
 if 'api_key_given' not in st.session_state: 
     st.session_state.api_key_given = False
@@ -133,8 +133,9 @@ voice = st.sidebar.selectbox("Select a voice for your bot", options=[None, '🛠
 
 openai_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
 if openai_key: 
-    st.session_state.api_key_given = True
     write_api_key(openai_key)
+    st.session_state.api_key_given = True
+    st.session_state.openai_conn = ChatGeneration()
 
 if st.session_state.api_key_given:
     # Display or clear chat messages
