@@ -4,7 +4,7 @@ from typing import Tuple
 from random_emoji import random_emoji
 from openai import OpenAI
 from dotenv import load_dotenv 
-import playsound 
+import playsound
 
 class ChatGeneration(): 
     def __init__(self): 
@@ -29,7 +29,7 @@ class ChatGeneration():
 
         response.stream_to_file("output.mp3")
         playsound.playsound("output.mp3")
-    
+
     def generate_random_bot(self) -> Tuple[str, Tuple[str, str]]: 
         rand_emoji = random_emoji()
         rand_name = self.generate_response(messages=[
