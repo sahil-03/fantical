@@ -11,8 +11,8 @@ from pypdf import PdfReader
 from router import EmbeddingHandler
 
 class RetrievalAugmentedGeneration(EmbeddingHandler): 
-    def __init__(self): 
-        super().__init__()
+    def __init__(self, key): 
+        super().__init__(key)
         self.index = None
         self.documents = []
 

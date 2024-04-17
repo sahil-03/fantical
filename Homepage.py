@@ -51,7 +51,7 @@ if 'openai_conn' not in st.session_state:
     st.session_state.openai_conn = None
 
 if 'api_key_given' not in st.session_state: 
-    st.session_state.api_key_given = False
+    st.session_state.api_key_given = None
 
 if "messages" not in st.session_state:
     st.session_state.messages = {DEFAULT_BOT: [{"role": "system", "content": st.session_state.bot_config[BOT_PERSONALITIES_KEY][DEFAULT_BOT]}, 
@@ -68,17 +68,17 @@ def add_bot_to_session(emoji: str, name: str, description: str, pdf_files: Optio
     st.session_state.messages[bot_name] = [{"role": "system", "content": description}, {"role": "assistant", "content": "Hey there!"}]
     
     if pdf_files: 
-        rag = RetrievalAugmentedGeneration()
+        rag = RetrievalAugmentedGeneration(st.session_state.api_key_given)
         rag.build_index(pdf_files)
         st.session_state.vector_db[bot_name] = rag
 
 def get_bot_avatar(role: str) -> str: 
     return role.split(' ')[0]
 
-def write_api_key(key: str) -> None: 
-    with open('.env', 'w') as f: 
-        f.write(f'OPENAI_API_KEY={key}')
-    f.close()
+# def write_api_key(key: str) -> None: 
+#     with open('.env', 'w') as f: 
+#         f.write(f'OPENAI_API_KEY={key}')
+#     f.close()
 
 st.title("🦄 Fantical")
 
@@ -133,9 +133,9 @@ voice = None #st.sidebar.selectbox("Select a voice for your bot", options=[None,
 
 openai_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
 if openai_key: 
-    write_api_key(openai_key)
-    st.session_state.api_key_given = True
-    st.session_state.openai_conn = ChatGeneration()
+    # write_api_key(openai_key)
+    st.session_state.api_key_given = openai_key
+    st.session_state.openai_conn = ChatGeneration(openai_key)
 
 if st.session_state.api_key_given:
     # Display or clear chat messages

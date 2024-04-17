@@ -36,7 +36,7 @@ def add_new_group_chat(group_name: str, group_members: List[str], group_topic: s
     assert group_name != "" and not group_name.isspace(), "Group name must be given"
     assert len(group_members) > 1, "There must be at least 3 members in a group (including you)."
 
-    mr = MessageRouter(group_members)
+    mr = MessageRouter(group_members, st.session_state.api_key_given)
     st.session_state.group_config[GROUP_CHATS_KEY].append(group_name)
     st.session_state.group_config[GROUP_CHAT_MEMBERS_KEY].update({group_name: group_members})
     st.session_state.group_config[GROUP_CHAT_ROUTER_KEY].update({group_name: mr})

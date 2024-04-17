@@ -5,10 +5,10 @@ from typing import List
 from typing import Any
 
 class EmbeddingHandler(): 
-    def __init__(self): 
-        load_dotenv()
+    def __init__(self, key): 
+        # load_dotenv()
         self.model = "text-embedding-3-small"
-        self.client = OpenAI()
+        self.client = OpenAI(api_key=key)
     
     def get_embedding(self, text: str) -> Any: 
         text = text.replace("\n", " ")
@@ -22,8 +22,8 @@ class EmbeddingHandler():
 
     
 class MessageRouter(EmbeddingHandler): 
-    def __init__(self, group_chat_members):
-        super().__init__()
+    def __init__(self, group_chat_members, key):
+        super().__init__(key)
         self.member_chat_embeddings = {member: [] for member in group_chat_members}
 
     def message_router(self, sender: str, message: str) -> str:

@@ -7,10 +7,10 @@ from dotenv import load_dotenv
 import playsound
 
 class ChatGeneration(): 
-    def __init__(self): 
-        load_dotenv() 
+    def __init__(self, key): 
+        # load_dotenv() 
         self.model = "gpt-3.5-turbo"
-        self.client = OpenAI()
+        self.client = OpenAI(api_key=key)
 
     def generate_response(self, messages: List[Dict[str, str]]) -> None:
         response = self.client.chat.completions.create(
