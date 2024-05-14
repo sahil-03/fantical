@@ -8,3 +8,4 @@ This is an app where users can talk to fun, personalized chat bots. Here is a li
 4. Tell it more about yourself (your name, age, gender, interests, ...) so you can have more personalized conversations.
 5. Create group chats with multiple bots and yourself!
 
+Definitely try to play around with this yourself. It is super fun! I think the original streamlit app is down, so feel free to clone the repo directly to play around locally. It is also stateless, so it won't remember anything you give/tell it. 
